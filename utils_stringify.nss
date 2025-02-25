@@ -12,15 +12,15 @@ itemproperty ItemPropertyFromString(string sIPStringRepr);
 // code taken from jallaix's jx_inc_data_func.nss
 string ItemPropertyToString(itemproperty ipProp)
 {
-    int iIPType = GetItemmPropertyType(ipProp);
+    int iIPType = GetItemPropertyType(ipProp);
 
     //catch unrepresentable types
     if ((iIPType == ITEM_PROPERTY_MIND_BLANK)
-        || (IIPType == ITEM_PROPERTY_ON_MONSTER_HIT))
+        || (iIPType == ITEM_PROPERTY_ON_MONSTER_HIT))
         return "";
 
     int iIPSubType = GetItemPropertySubType(ipProp);
-    int iIPParamValue = GetItemPropertyPAram1Value(ipProp);
+    int iIPParam1Value = GetItemPropertyParam1Value(ipProp);
     int iIPCostTableValue = GetItemPropertyCostTableValue(ipProp);
 
     string sItemProperty = IntToString(iIPType);
@@ -153,7 +153,7 @@ string ItemPropertyToString(itemproperty ipProp)
 
 }
 
-itemproperty ItemPropertyFromString(string sIPStringRepr)
-{
+// itemproperty ItemPropertyFromString(string sIPStringRepr)
+// {
 
-}
+// }

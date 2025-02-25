@@ -8,9 +8,9 @@ const string LOCAL_VAR_STDERR_LAST_CALLER = "UTILS_STDERR_CALLER";
 
 //============================================== Declarations ============================
 
-void SetSTDERR(string sCurrCaller, object oOwner=OBJECT_SELF);
+void SetSTDERR(string sCurrCaller, int iValue=1, object oOwner=OBJECT_SELF);
 
-void ResetSTDERR(object oOwner=OBJECT_SELF)
+void ResetSTDERR(object oOwner=OBJECT_SELF);
 
 int GetSTDERR(object oOwner=OBJECT_SELF);
 
@@ -19,16 +19,17 @@ int GetSTDERR(object oOwner=OBJECT_SELF);
 void SetSTDERR(string sCurrCaller, int iValue=1, object oOwner=OBJECT_SELF)
 {
     location lCurrLoc = GetLocation(oOwner);
-    string sCallInfo =  ObjectToString(oOwner) ++ ":" ++ sCurrCaller ++ ":" ++ LocationToString(lCurrLoc);
+    string sCallInfo =  ObjectToString(oOwner) + ":" + sCurrCaller + ":" + LocationToString(lCurrLoc);
     SetLocalInt(oOwner, LOCAL_VAR_STDERR, 1);
-    SetLocalString(oOwner, LOCAL_VAR_STDERR_CALLER, sCurrCaller);
-    SetLocalString(oOwner, LOCAL_VAR_STDERR_CALL_INFO, sCallInfo);
+    SetLocalString(oOwner, LOCAL_VAR_STDERR_LAST_CALLER, sCurrCaller);
+    SetLocalString(oOwner, LOCAL_VAR_STDERR_LAST_CALL_INFO, sCallInfo);
 }
 
 void ResetSTDERR(object oOwner=OBJECT_SELF)
 {
     SetLocalInt(oOwner, LOCAL_VAR_STDERR, 0);
-    SetLocalString(oOwner, "");
+    SetLocalString(oOwner, LOCAL_VAR_STDERR_LAST_CALL_INFO,"");
+    SetLocalString(oOwner, LOCAL_VAR_STDERR_LAST_CALLER, "");
 }
 
 int GetSTDERR(object oOwner=OBJECT_SELF)

@@ -1,13 +1,15 @@
-#include "utils_local_arrays"
+// FIXME: impement array ops
+// #include "utils_array"
 #include "utils_stringify"
-#include "utils_error"
+// FIXME: implement error channels
+// #include "utils_error"
 
 const string MODULE_VAR_UTILS_LOG_LEVEL =  "UTILS_LOG_LEVEL";
 
-const int LOG_LEVEL_QUIET = 1;
-const int LOG_LEVEL_ERROR = 2;
-const int LOG_LEVEL_WARNING = 3;
-const int LOG_LEVEL_INFO = 4;
+const int LOG_LEVEL_QUIET = 0;
+const int LOG_LEVEL_ERROR = 1;
+const int LOG_LEVEL_WARNING = 2;
+const int LOG_LEVEL_INFO = 3;
 
 const int D3      = 3;
 const int D4      = 5;
@@ -115,7 +117,7 @@ void Warning(string message, string color="orange", int iIgnoreLogLevel=FALSE)
 void SetLogLevel(int iLevel)
 {
     iLevel = Clamp(iLevel, LOG_LEVEL_QUIET, LOG_LEVEL_INFO);
-    SetLocalInt(GetModule(), iLevel);
+    SetLocalInt(GetModule(), MODULE_VAR_UTILS_LOG_LEVEL, iLevel);
 }
 
 int GetLogLevel()
@@ -124,7 +126,7 @@ int GetLogLevel()
 }
 
 int Clamp(int iValue, int iLower=0, int iUpper=40) {
-    if (iValue > iUpper) return iUpper; 
+    if (iValue > iUpper) return iUpper;
     if (iValue < iLower) return iLower;
     return iValue;
 }
