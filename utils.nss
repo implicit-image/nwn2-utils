@@ -181,12 +181,12 @@ string ArrayAt(string sArr, int iIndex1=-1, int iIndex2=-1, int iIndex3=-1, int 
 
 void SetArrayIntAt(int iValue, string sArr, int iIndex1=-1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1)
 {
-    SetLocalInt(OBJECT_SELF, ArrayAt(sArr, iIndex1, iIndex2, iIndex3, iIndex4, iIndex5), iValue)
+    SetLocalInt(OBJECT_SELF, ArrayAt(sArr, iIndex1, iIndex2, iIndex3, iIndex4, iIndex5), iValue);
 }
 
 void SetArrayFloatAt(float fValue, string sArr, int iIndex1=-1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1)
 {
-    SetLocalFloat(OBJECT_SELF, ArrayAt(sArr, iIndex1, iIndex2, iIndex3, iIndex4, iIndex5), fValue)
+    SetLocalFloat(OBJECT_SELF, ArrayAt(sArr, iIndex1, iIndex2, iIndex3, iIndex4, iIndex5), fValue);
 }
 
 void SetArrayStringAt(string sValue, string sArr, int iIndex1=-1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1)
