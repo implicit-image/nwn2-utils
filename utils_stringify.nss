@@ -7,7 +7,13 @@ string ItemPropertyToString(itemproperty ipProp);
 
 itemproperty ItemPropertyFromString(string sIPStringRepr);
 
+string CustomEffectToString(struct CustomEffect stEffect);
+
+struct CustomEffect CustomEffectFromString(string sCustomEffect);
+
 //=============================================== Implementation ================
+
+
 
 // code taken from jallaix's jx_inc_data_func.nss
 string ItemPropertyToString(itemproperty ipProp)
@@ -157,3 +163,15 @@ string ItemPropertyToString(itemproperty ipProp)
 // {
 
 // }
+
+string CustomEffectToString(struct CustomEffect e)
+{
+    string sRepr = IntToString(e.iType);
+    return "";
+}
+
+struct CustomEffect CustomEffectFromString(string sCustomEffect)
+{
+    struct CustomEffect stRes;
+    return stRes;
+}

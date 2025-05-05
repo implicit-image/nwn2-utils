@@ -1,38 +1,22 @@
 
-
+const int RESULT_TYPE_NOTHING = -1;
 const int RESULT_TYPE_INT = 1;
-
+const int RESULT_TYPE_STRING = 2;
+const int RESULT_TYPE_FLOAT = 3;
+const int RESULT_TYPE_LOCATION = 4;
+const int RESULT_TYPE_OBJECT = 5;
+const int RESULT_TYPE_EFFECT = 6;
+const int RESULT_TYPE_ITEMPROPERTY = 7;
 
 struct Result
 {
-    int iType,
-    int bIsNull,
-    string sValue,
-    int iValue,
-    float fValue,
-    location lValue,
-    object oValue,
-    effect eValue,
-    itemproperty ipValue
-}
-
-
-struct Result MakeResult()
-{
-    struct Result stR;
-    stR.iTypee = RESULT_TYPE_INT;
-    stR.bIsNull = TRUE;
-    stR.sValue = "this is a value";
-    stR.iValue = 0;
-    stR.fValue = 0.0;
-    stR.lValue = Location(OBJECT_SELF, Vector(0.0, 0.0, 0.0), 0.0);
-    stR.oValue = OBJECT_SELF;
-    stR.eValue = EffectHaste();
-    stR.ipValue = ItemPropertyHaste();
-    return stR;
-}
-
-void main()
-{
-    struct Result r = MakeResult();
-}
+    int iType;
+    int bIsNull;
+    string String;
+    int Int;
+    float Float;
+    location Location;
+    object Object;
+    effect Effect;
+    itemproperty ItemProperty;
+};
