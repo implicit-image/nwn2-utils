@@ -7,9 +7,9 @@ string ItemPropertyToString(itemproperty ipProp);
 
 itemproperty ItemPropertyFromString(string sIPStringRepr);
 
-string CustomEffectToString(struct CustomEffect stEffect);
-
-struct CustomEffect CustomEffectFromString(string sCustomEffect);
+// string CustomEffectToString(struct CustomEffect stEffect);
+//
+// struct CustomEffect CustomEffectFromString(string sCustomEffect);
 
 //=============================================== Implementation ================
 
@@ -159,19 +159,19 @@ string ItemPropertyToString(itemproperty ipProp)
 
 }
 
-// itemproperty ItemPropertyFromString(string sIPStringRepr)
+// // itemproperty ItemPropertyFromString(string sIPStringRepr)
+// // {
+//
+// // }
+//
+// string CustomEffectToString(struct CustomEffect e)
 // {
-
+//     string sRepr = IntToString(e.iType);
+//     return "";
 // }
-
-string CustomEffectToString(struct CustomEffect e)
-{
-    string sRepr = IntToString(e.iType);
-    return "";
-}
-
-struct CustomEffect CustomEffectFromString(string sCustomEffect)
-{
-    struct CustomEffect stRes;
-    return stRes;
-}
+//
+// struct CustomEffect CustomEffectFromString(string sCustomEffect)
+// {
+//     struct CustomEffect stRes;
+//     return stRes;
+// }
