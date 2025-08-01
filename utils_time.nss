@@ -14,24 +14,24 @@ struct TimeStamp GetCurrentTimeStamp()
     int iCurSecond = GetTimeSecond() * 1000;
     int iCurMilisecond = GetTimeMillisecond();
 
-    struct TimeStamp TimeStamp;
+    struct TimeStamp timeStamp;
 
     int iMiliseconds = iCurHour + iCurMinute + iCurSecond + iCurMilisecond;
 
-    TimeStamp.miliseconds = iMiliseconds;
-    TimeStamp.variableId = "TIME_" + IntToString(miliseconds);
+    timeStamp.miliseconds = iMiliseconds;
+    timeStamp.variableId = "TIME_" + IntToString(miliseconds);
 
-    return TimeStamp;
+    return timeStamp;
 }
 
 // FIXME: possibly too many local variables allocated
 void SetTimeStamp(object oTarget=OBJECT_SELF)
 {
-    struct TimeStamp TimeStamp = GetCurrentTimeStamp();
+    struct TimeStamp timeStamp = GetCurrentTimeStamp();
     // remember last set timestamp variable for oTarget
-    SetLocalString(oTarget, UTILS_LAST_TIMESTAMP, TimeStamp.variableId);
+    SetLocalString(oTarget, UTILS_LAST_TIMESTAMP, timeStamp.variableId);
     // save timestamp miliseconds
-    SetLocalInt(oTarget, TimeStamp.variableId, TimeStamp.miliseconds);
+    SetLocalInt(oTarget, timeStamp.variableId, timeStamp.miliseconds);
 }
 
 string GetLastTimeStampVariable(oTarget=OBJECT_SELF)
