@@ -19,7 +19,7 @@ struct TimeStamp GetCurrentTimeStamp()
     int iMiliseconds = iCurHour + iCurMinute + iCurSecond + iCurMilisecond;
 
     timeStamp.miliseconds = iMiliseconds;
-    timeStamp.variableId = "TIME_" + IntToString(miliseconds);
+    timeStamp.variableId = "TIME_" + IntToString(iMiliseconds);
 
     return timeStamp;
 }
