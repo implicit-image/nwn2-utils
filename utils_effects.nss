@@ -41,7 +41,7 @@ const int EFFECT_TYPE_SUMMON_COPY = 119;
 const int EFFECT_TYPE_DAMAGESHIELD = 60;
 
 
-
+/*
 struct CustomEffect MakeCustomEffect(int iEffectType, int iEffectSubtype)
 {
     // effect eLeft, eRight;
@@ -926,6 +926,7 @@ struct MaybeEffect CreateEffectFromCustomEffect(struct CustomEffect e)
 
     return stRes;
 }
+*/
 // Gets a description for the given effect.
 string GetEffectStringDescription(effect e)
 {
