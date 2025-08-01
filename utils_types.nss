@@ -133,8 +133,8 @@ void TypeError(int iPassedType, int iExpectedType1=0, int iExpectedType2=0, int 
     if (iExpectedType5 != 0) sExMsg = sExMsg + "or " + TypeName(iExpectedType5) + " ";
     if (iExpectedType6 != 0) sExMsg = sExMsg + "or " + TypeName(iExpectedType6) + " ";
 
-    Log(sErrMsg, "red");
-    Log(sExMsg, "red");
+    Log(sErrMsg, OBJECT_SELF, "red");
+    Log(sExMsg, OBJECT_SELF, "red");
 }
 
 string TypeName(int iType)
