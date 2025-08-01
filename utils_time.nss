@@ -34,12 +34,12 @@ void SetTimeStamp(object oTarget=OBJECT_SELF)
     SetLocalInt(oTarget, timeStamp.variableId, timeStamp.miliseconds);
 }
 
-string GetLastTimeStampVariable(oTarget=OBJECT_SELF)
+string GetLastTimeStampVariable(object oTarget=OBJECT_SELF)
 {
     return GetLocalString(oTarget, UTILS_LAST_TIMESTAMP);
 }
 
-int GetLastTimeStampMiliseconds(oTarget=OBJECT_SELF)
+int GetLastTimeStampMiliseconds(object oTarget=OBJECT_SELF)
 {
     return GetLocalInt(oTarget, GetLastTimeStampVariable(oTarget));
 }
