@@ -14,7 +14,7 @@ struct TimeStamp GetCurrentTimeStamp()
     int iCurSecond = GetTimeSecond() * 1000;
     int iCurMilisecond = GetTimeMillisecond();
 
-    struct TimeStampData TimeStamp;
+    struct TimeStamp TimeStamp;
 
     int iMiliseconds = iCurHour + iCurMinute + iCurSecond + iCurMilisecond;
 
@@ -36,10 +36,10 @@ void SetTimeStamp(object oTarget=OBJECT_SELF)
 
 string GetLastTimeStampVariable(oTarget=OBJECT_SELF)
 {
-    GetLocalString(oTarget, UTILS_LAST_TIMESTAMP);
+    return GetLocalString(oTarget, UTILS_LAST_TIMESTAMP);
 }
 
 int GetLastTimeStampMiliseconds(oTarget=OBJECT_SELF)
 {
-    GetLocalInt(oTarget, GetLastTimeStampVariable(oTarget));
+    return GetLocalInt(oTarget, GetLastTimeStampVariable(oTarget));
 }
