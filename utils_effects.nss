@@ -523,7 +523,7 @@ struct MaybeEffect CreateEffectFromCustomEffect(struct CustomEffect e)
         }
         case EFFECT_TYPE_DEAF:
         {
-            eRes = EffectDeaf()
+            eRes = EffectDeaf();
             break;
         }
         case EFFECT_TYPE_SLEEP:
