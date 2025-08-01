@@ -709,7 +709,7 @@ struct MaybeEffect CreateEffectFromCustomEffect(struct CustomEffect e)
         case EFFECT_TYPE_SANCTUARY:
         {
             eRes = EffectSanctuary(e.iArg1);
-            break
+            break;
         }
         case EFFECT_TYPE_TRUESEEING:
         {
