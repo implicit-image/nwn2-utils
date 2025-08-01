@@ -3,27 +3,27 @@
 #include "utils_array"
 
 
-struct CustomEffect MakeCustomEffect(int iEffectType, int iEffectSubtype);
-
-struct CustomEffect CustomEffectSetArgInt(struct CustomEffect stEffect, int iValue, int iArgPos);
-
-struct CustomEffect CustomEffectSetArgFloat(struct CustomEffect stEffect, float fValue, int iArgPos);
-
-struct CustomEffect CustomEffectSetArgString(struct CustomEffect stEffect, string sValue, int iArgPos);
-
-struct CustomEffect CustomEffectSetArgObject(struct CustomEffect stEffect, object oValue, int iArgPos);
-
-struct CustomEffect CustomEffectSetArgLocation(struct CustomEffect stEffect, location lValue, int iArgPos);
-
-struct CustomEffect CustomEffectSetArgVector(struct CustomEffect stEffect, vector vValue, int iArgPos);
-
-struct MaybeEffect CreateEffectFromCustomEffect(struct CustomEffect stEffect);
-
-struct EffectLink MyEffectLinkEffects(effect eChild, effect eParent);
-
-effect JoinEffectLink(struct EffectLink stLink);
-
-string GetEffectString(effect e);
+// struct CustomEffect MakeCustomEffect(int iEffectType, int iEffectSubtype);
+//
+// struct CustomEffect CustomEffectSetArgInt(struct CustomEffect stEffect, int iValue, int iArgPos);
+//
+// struct CustomEffect CustomEffectSetArgFloat(struct CustomEffect stEffect, float fValue, int iArgPos);
+//
+// struct CustomEffect CustomEffectSetArgString(struct CustomEffect stEffect, string sValue, int iArgPos);
+//
+// struct CustomEffect CustomEffectSetArgObject(struct CustomEffect stEffect, object oValue, int iArgPos);
+//
+// struct CustomEffect CustomEffectSetArgLocation(struct CustomEffect stEffect, location lValue, int iArgPos);
+//
+// struct CustomEffect CustomEffectSetArgVector(struct CustomEffect stEffect, vector vValue, int iArgPos);
+//
+// struct MaybeEffect CreateEffectFromCustomEffect(struct CustomEffect stEffect);
+//
+// struct EffectLink MyEffectLinkEffects(effect eChild, effect eParent);
+//
+// effect JoinEffectLink(struct EffectLink stLink);
+//
+// string GetEffectString(effect e);
 
 // missing effect ids
 
