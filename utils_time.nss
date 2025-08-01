@@ -5,7 +5,7 @@ struct TimeStamp
 {
     int miliseconds;
     string variableId;
-}
+};
 
 struct TimeStamp GetCurrentTimeStamp()
 {
