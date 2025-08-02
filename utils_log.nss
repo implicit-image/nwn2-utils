@@ -59,6 +59,7 @@ void ResetLogObject()
 void Log(string message, object oTarget=OBJECT_SELF, string color="white")
 {
     string RGBmsg = "<color=" + color + ">" + message + "</color>";
+    WriteTimestampedLogEntry(message);
     SendMessageToPC(oTarget, RGBmsg);
 }
 
