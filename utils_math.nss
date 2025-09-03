@@ -37,7 +37,7 @@ float ClampFloat(float fValue, float fLower=0.0, float fUpper=40.0)
 // returns PS_DICE_INVALID if invalid D* constant has been passed
 int DiceRoll(int iDice, int iDiceNumber=1)
 {
-    switch (nDice)
+    switch (iDice)
     {
         case D2: return d2(iDiceNumber);
         case D3: return d3(iDiceNumber);

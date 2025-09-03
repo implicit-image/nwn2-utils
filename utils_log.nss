@@ -98,7 +98,7 @@ void Warning(string message, string color="orange", int iIgnoreLogLevel=FALSE)
 
 void SetLogLevel(int iLevel)
 {
-    iLevel = Clamp(iLevel, LOG_LEVEL_QUIET, LOG_LEVEL_INFO);
+    iLevel = ClampInt(iLevel, LOG_LEVEL_QUIET, LOG_LEVEL_INFO);
     SetLocalInt(GetModule(), MODULE_VAR_UTILS_LOG_LEVEL, iLevel);
 }
 
