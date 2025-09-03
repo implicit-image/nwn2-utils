@@ -5,20 +5,21 @@
 Functions for manipulating local string lists.
 */
 
+const string STRING_LIST_DEFAULT_DELIMITER = ",";
 
-string AppendToLocalStringList(string sVar, string sElem, string sDelimiter=",", object
+string AppendToLocalStringList(string sVar, string sElem, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER, object
 oObject=OBJECT_SELF);
 
-string PrependToLocalStringList(string sVar, string sElem, string sDelimiter=",", object oObject=OBJECT_SELF);
+string PrependToLocalStringList(string sVar, string sElem, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER, object oObject=OBJECT_SELF);
 
-int IsInLocalStringList(string sVar, string sElem, string sDelimiter=",", object oObject=OBJECT_SELF);
+int IsInLocalStringList(string sVar, string sElem, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER, object oObject=OBJECT_SELF);
 
-string DeleteFromLocalStringList(string sVar, string sElem, string sDelimiter=",", int iDeleteAll=TRUE, object oObject=OBJECT_SELF);
+string DeleteFromLocalStringList(string sVar, string sElem, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER, int iDeleteAll=TRUE, object oObject=OBJECT_SELF);
 
-string AdjustStringListElem(string sElem, string sList, string sDelimiter=",");
+string AdjustStringListElem(string sElem, string sList, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER);
 
 //================== Implementation ===========================
-string AppendToLocalStringList(string sVar, string sElem, string sDelimiter=",", object
+string AppendToLocalStringList(string sVar, string sElem, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER, object
 oObject=OBJECT_SELF)
 {
     string sList = GetLocalString(oObject, sVar);
@@ -26,28 +27,27 @@ oObject=OBJECT_SELF)
     return AppendToLocalString(sVar, sElem, oObject);
 }
 
-string PrependToLocalStringList(string sVar, string sElem, string sDelimiter=",", object oObject=OBJECT_SELF)
+string PrependToLocalStringList(string sVar, string sElem, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER, object oObject=OBJECT_SELF)
 {
     string sList = GetLocalString(oObject, sVar);
     sElem = AdjustStringListElem(sElem, sList, sDelimiter);
     return PrependToLocalString(sVar, sElem, oObject);
 }
 
-int IsInLocalStringList(string sVar, string sElem, string sDelimiter=",", object oObject=OBJECT_SELF)
+int IsInLocalStringList(string sVar, string sElem, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER, object oObject=OBJECT_SELF)
 {
     string sList = GetLocalString(oObject, sVar);
     if (sList == "") return FALSE;
     return GetIsInList(sList, sElem, sDelimiter);
 }
 
-string DeleteFromLocalStringList(string sVar, string sElem, string sDelimiter=",", int iDeleteAll=TRUE, object oObject=OBJECT_SELF)
+string DeleteFromLocalStringList(string sVar, string sElem, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER, int iDeleteAll=TRUE, object oObject=OBJECT_SELF)
 {
     string sList = GetLocalString(oObject, sVar);
     string sNewList = "";
     string sCur;
     int iOneDeleted = FALSE;
     struct sStringTokenizer sTok = GetStringTokenizer(sList, sDelimiter);
-
     while (HasMoreTokens(sTok))
     {
         sTok = AdvanceToNextToken(sTok);
@@ -76,12 +76,8 @@ string DeleteFromLocalStringList(string sVar, string sElem, string sDelimiter=",
     return sNewList;
 }
 
-string AdjustStringListElem(string sElem, string sList, string sDelimiter=",")
+string AdjustStringListElem(string sElem, string sList, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER)
 {
-    if (GetStringRight(sList, 1) != sDelimiter
-    || sList != "")
-    {
-        sElem = sDelimiter + sElem;
-    }
-    return sElem;
+    if (sList == "" || GetStringRight(sList, 1) == sDelimiter) return sElem;
+    return sDelimiter + sElem;
 }
