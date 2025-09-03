@@ -4,6 +4,13 @@
 #include "utils_array"
 #include "utils_time"
 #include "utils_effects"
+#include "utils_vars"
+#include "utils_list"
 
 
-const int UTILS_STATUS = 1;
+/*
+void main()
+{
+    Log("Hello");
+}
+*/
