@@ -19,7 +19,7 @@ int MultiplyLocalInt(string sVar, int iMultiplyBy, object oObject=OBJECT_SELF);
 
 int DivideLocalInt(string sVar, int iDivideBy, object oObject=OBJECT_SELF);
 
-int ModifyLocalInt(int iOp, string sVar, int iModifyBy, object oObject=OBJECT_SELF);
+int ImplModifyLocalInt(int iOp, string sVar, int iModifyBy, object oObject=OBJECT_SELF);
 
 float IncrementLocalFloat(string sVar, float fIncrementBy=1.0, object oObject=OBJECT_SELF);
 
@@ -29,13 +29,13 @@ float MultiplyLocalFloat(string sVar, float fMultiplyBy, object oObject=OBJECT_S
 
 float DivideLocalFloat(string sVar, float fDivideBy, object oObject=OBJECT_SELF);
 
-float ModifyLocalFloat(int iOp, string sVar, float fModifyBy, object oObject=OBJECT_SELF);
+float ImplModifyLocalFloat(int iOp, string sVar, float fModifyBy, object oObject=OBJECT_SELF);
 
 string AppendToLocalString(string sVar, string sSuffix, object oObject=OBJECT_SELF);
 
 string PrependToLocalString(string sVar, string sPrefix, object oObject=OBJECT_SELF);
 
-string ModifyLocalString(int iOp, string sVar, string sValue, object oObject=OBJECT_SELF);
+string ImplModifyLocalString(int iOp, string sVar, string sValue, object oObject=OBJECT_SELF);
 
 int IsVarLengthOk(string sVar);
 
@@ -43,25 +43,25 @@ int IsVarLengthOk(string sVar);
 
 int IncrementLocalInt(string sVar, int iIncrementBy=1, object oObject=OBJECT_SELF)
 {
-    return ModifyLocalInt(VAR_OP_INCREMENT, sVar, iIncrementBy, oObject);
+    return ImplModifyLocalInt(VAR_OP_INCREMENT, sVar, iIncrementBy, oObject);
 }
 
 int DecrementLocalInt(string sVar, int iDecrementBy=1, object oObject=OBJECT_SELF)
 {
-    return ModifyLocalInt(VAR_OP_DECREMENT, sVar, iDecrementBy, oObject);
+    return ImplModifyLocalInt(VAR_OP_DECREMENT, sVar, iDecrementBy, oObject);
 }
 
 int MultiplyLocalInt(string sVar, int iMultiplyBy, object oObject=OBJECT_SELF)
 {
-    return ModifyLocalInt(VAR_OP_MULTIPLY, sVar, iMultiplyBy, oObject);
+    return ImplModifyLocalInt(VAR_OP_MULTIPLY, sVar, iMultiplyBy, oObject);
 }
 
 int DivideLocalInt(string sVar, int iDivideBy, object oObject=OBJECT_SELF)
 {
-    return ModifyLocalInt(VAR_OP_DIVIDE, sVar, iDivideBy, oObject);
+    return ImplModifyLocalInt(VAR_OP_DIVIDE, sVar, iDivideBy, oObject);
 }
 
-int ModifyLocalInt(int iOp, string sVar, int iModifyBy, object oObject=OBJECT_SELF)
+int ImplModifyLocalInt(int iOp, string sVar, int iModifyBy, object oObject=OBJECT_SELF)
 {
     int iOldValue = GetLocalInt(oObject, sVar);
     int iNewValue = iOldValue;
@@ -97,25 +97,25 @@ int ModifyLocalInt(int iOp, string sVar, int iModifyBy, object oObject=OBJECT_SE
 
 float IncrementLocalFloat(string sVar, float fIncrementBy=1.0, object oObject=OBJECT_SELF)
 {
-    return ModifyLocalFloat(VAR_OP_INCREMENT, sVar, fIncrementBy, oObject);
+    return ImplModifyLocalFloat(VAR_OP_INCREMENT, sVar, fIncrementBy, oObject);
 }
 
 float DecrementLocalFloat(string sVar, float fDecrementBy=1.0, object oObject=OBJECT_SELF)
 {
-    return ModifyLocalFloat(VAR_OP_DECREMENT, sVar, fDecrementBy, oObject);
+    return ImplModifyLocalFloat(VAR_OP_DECREMENT, sVar, fDecrementBy, oObject);
 }
 
 float MultiplyLocalFloat(string sVar, float fMultiplyBy, object oObject=OBJECT_SELF)
 {
-    return ModifyLocalFloat(VAR_OP_MULTIPLY, sVar, fMultiplyBy, oObject);
+    return ImplModifyLocalFloat(VAR_OP_MULTIPLY, sVar, fMultiplyBy, oObject);
 }
 
 float DivideLocalFloat(string sVar, float fDivideBy, object oObject=OBJECT_SELF)
 {
-    return ModifyLocalFloat(VAR_OP_DIVIDE, sVar, fDivideBy, oObject);
+    return ImplModifyLocalFloat(VAR_OP_DIVIDE, sVar, fDivideBy, oObject);
 }
 
-float ModifyLocalFloat(int iOp, string sVar, float fModifyBy, object oObject=OBJECT_SELF)
+float ImplModifyLocalFloat(int iOp, string sVar, float fModifyBy, object oObject=OBJECT_SELF)
 {
     float fOldValue = GetLocalFloat(oObject, sVar);
     float fNewValue = fOldValue;
@@ -152,15 +152,15 @@ float ModifyLocalFloat(int iOp, string sVar, float fModifyBy, object oObject=OBJ
 
 string AppendToLocalString(string sVar, string sSuffix, object oObject=OBJECT_SELF)
 {
-    return ModifyLocalString(VAR_OP_APPEND, sVar, sSuffix, oObject);
+    return ImplModifyLocalString(VAR_OP_APPEND, sVar, sSuffix, oObject);
 }
 
 string PrependToLocalString(string sVar, string sPrefix, object oObject=OBJECT_SELF)
 {
-    return ModifyLocalString(VAR_OP_PREPEND, sVar, sPrefix, oObject);
+    return ImplModifyLocalString(VAR_OP_PREPEND, sVar, sPrefix, oObject);
 }
 
-string ModifyLocalString(int iOp, string sVar, string sValue, object oObject=OBJECT_SELF)
+string ImplModifyLocalString(int iOp, string sVar, string sValue, object oObject=OBJECT_SELF)
 {
     string sOldValue = GetLocalString(oObject, sVar);
     string sNewValue = sOldValue;
