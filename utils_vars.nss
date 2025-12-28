@@ -3,7 +3,6 @@
 Functions for manipulating local variables.
 */
 
-
 const int VAR_OP_INCREMENT = 1;
 const int VAR_OP_DECREMENT = 2;
 const int VAR_OP_MULTIPLY = 3;

@@ -122,6 +122,42 @@ struct EffectLink
     effect _10;
 };
 
+
+struct local_string
+{
+    string sVar;
+    string sValue;
+    object oOwner;
+};
+
+struct local_int
+{
+    string sVar;
+    int iValue;
+    object oOwner;
+};
+
+struct local_float
+{
+    string sVar;
+    float fValue;
+    object oOwner;
+};
+
+struct local_object
+{
+    string sVar;
+    object oValue;
+    object oOwner;
+};
+
+struct local_location
+{
+    string sVar;
+    location lValue;
+    object oOwner;
+};
+
 void TypeError(int iPassedType, int iExpectedType1=0, int iExpectedType2=0, int iExpectedType3=0, int iExpectedType4=0, int iExpectedType5=0, int iExpectedType6=0)
 {
     string sErrMsg = "Type Error: passed argument of type " + TypeName(iPassedType);
@@ -150,4 +186,57 @@ string TypeName(int iType)
         default:            return TYPE_NAME_INVALID;
     }
     return TYPE_NAME_INVALID;
+}
+
+struct local_int MakeLocalInt(string sVar, int iValue, object oOwner=OBJECT_SELF)
+{
+    struct local_int LocalInt;
+    LocalInt.sVar = sVar;
+    LocalInt.iValue = iValue;
+    LocalInt.oOwner = oOwner;
+
+    return LocalInt;
+}
+
+struct local_string MakeLocalString(string sVar, string sValue, object oOwner=OBJECT_SELF)
+{
+    struct local_string LocalString;
+    LocalString.sVar = sVar;
+    LocalString.sValue = sValue;
+    LocalString.oOwner = oOwner;
+
+    return LocalString;
+}
+
+struct local_float MakeLocalFloat(string sVar, float fValue, object oOwner=OBJECT_SELF)
+{
+    struct local_float LocalFloat;
+    LocalFloat.sVar = sVar;
+    LocalFloat.fValue = fValue;
+    LocalFloat.oOwner = oOwner;
+
+    return LocalFloat;
+}
+
+
+
+struct local_int MakeLocalInt(string sVar, int iValue, object oOwner=OBJECT_SELF)
+{
+    struct local_int LocalInt;
+    LocalInt.sVar = sVar;
+    LocalInt.iValue = iValue;
+    LocalInt.oOwner = oOwner;
+
+    return LocalInt;
+}
+
+
+struct local_int MakeLocalInt(string sVar, int iValue, object oOwner=OBJECT_SELF)
+{
+    struct local_int LocalInt;
+    LocalInt.sVar = sVar;
+    LocalInt.iValue = iValue;
+    LocalInt.oOwner = oOwner;
+
+    return LocalInt;
 }
