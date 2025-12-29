@@ -1,5 +1,5 @@
 #include "x2_inc_itemprop"
-
+#include "x0_i0_stringlib"
 
 //================================================ Declarations =================
 
@@ -7,10 +7,9 @@ string ItemPropertyToString(itemproperty ipProp);
 
 itemproperty ItemPropertyFromString(string sIPStringRepr);
 
-// string CustomEffectToString(struct CustomEffect stEffect);
-//
-// struct CustomEffect CustomEffectFromString(string sCustomEffect);
+string LocationToString(location lLocation);
 
+location StringToLocation(string sLocation);
 //=============================================== Implementation ================
 
 
@@ -159,19 +158,79 @@ string ItemPropertyToString(itemproperty ipProp)
 
 }
 
-// // itemproperty ItemPropertyFromString(string sIPStringRepr)
-// // {
-//
-// // }
-//
-// string CustomEffectToString(struct CustomEffect e)
-// {
-//     string sRepr = IntToString(e.iType);
-//     return "";
-// }
-//
-// struct CustomEffect CustomEffectFromString(string sCustomEffect)
-// {
-//     struct CustomEffect stRes;
-//     return stRes;
-// }
+itemproperty StringToItemProperty(string sItemProperty)
+{
+    itemproperty ipProperty;
+
+    // Initialize all item property's parameters
+    int iPrm = 1;
+    int iIPType = 0;
+    int iParam1 = 0;
+    int iParam2 = 0;
+    int iParam3 = 0;
+    int iParam4 = 0;
+    int iItemPropertyParam;
+
+    // Loop on all item property's parameters
+    int iPosComma = FindSubString(sItemProperty, ",");
+    while (1)
+    {
+        // Get the current item property's parameter
+        if (iPosComma == -1)
+            iItemPropertyParam = StringToInt(sItemProperty);
+        else
+        {
+            iItemPropertyParam = StringToInt(GetStringLeft(sItemProperty, iPosComma));
+            sItemProperty = GetSubString(sItemProperty, iPosComma + 1, GetStringLength(sItemProperty) - iPosComma + 1);
+        }
+        // Define the value of the current item property's parameter
+        if (iPrm == 1) iIPType = iItemPropertyParam;
+        else if (iPrm == 2) iParam1 = iItemPropertyParam;
+        else if (iPrm == 3) iParam2 = iItemPropertyParam;
+        else if (iPrm == 4) iParam3 = iItemPropertyParam;
+        else if (iPrm == 5) iParam4 = iItemPropertyParam;
+
+        // End loop if there are no other item property's parameters
+        if (iPosComma == -1) break;
+
+        iPosComma = FindSubString(sItemProperty, ",");
+        iPrm++;
+    }
+    ipProperty = IPGetItemPropertyByID(iIPType, iParam1, iParam2, iParam3, iParam4);
+
+    return ipProperty;
+}
+
+// Get a string from a corresponding location
+// - lLocation Location from which the string is get
+// * Returns a string corresponding to the location
+string LocationToString(location lLocation)
+{
+    // Get the location informations : area, position, orientation
+    object oArea = GetAreaFromLocation(lLocation);
+    vector vPosition = GetPositionFromLocation(lLocation);
+    float fOrientation = GetFacingFromLocation(lLocation);
+
+    string sArea = IntToString(ObjectToInt(oArea));
+    string sPosX = FloatToString(vPosition.x);
+    string sPosY = FloatToString(vPosition.y);
+    string sPosZ = FloatToString(vPosition.z);
+    string sOrientation = FloatToString(fOrientation);
+
+    return sArea + "!" + sPosX + "!" + sPosY + "!" + sPosZ + "!" + sOrientation;
+}
+
+// Get a location from a corresponding string
+// - sLocation String from which the location is get
+// * Returns a loation corresponding to the string
+location StringToLocation(string sLocation)
+{
+    object oArea = IntToObject(StringToInt(GetTokenByPosition(sLocation, "!", 0)));
+    vector vPosition;
+    vPosition.x = StringToFloat(GetTokenByPosition(sLocation, "!", 1));
+    vPosition.y = StringToFloat(GetTokenByPosition(sLocation, "!", 2));
+    vPosition.z = StringToFloat(GetTokenByPosition(sLocation, "!", 3));
+    float fOrientation = StringToFloat(GetTokenByPosition(sLocation, "!", 4));
+
+    return Location(oArea, vPosition, fOrientation);
+}

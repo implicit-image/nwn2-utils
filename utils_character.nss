@@ -1,12 +1,3 @@
-int GetSavingThrowValue(int iSave, object oPC);
-
-string GetSavingThrowName(int iSave);
-
-struct alignment_info GetAlignmentInfo(object oPC);
-
-string GetAlignmentName(int iLC, int iGE);
-
-//==================================== implementation ================================
 
 struct alignment_info
 {
@@ -16,29 +7,33 @@ struct alignment_info
     int iGEValue;
 };
 
-string GetSavingThrowName(int iSave)
-{
-    switch(iSave)
-    {
-        case SAVING_THROW_FORT: return "Fortitude";
-        case SAVING_THROW_REFLEX: return "Reflex";
-        case SAVING_THROW_WILL: return "Will";
-    }
-    return "";
-}
+int GetSavingThrowValue(int iSave, object oPC=OBJECT_SELF);
 
-int GetSavingThrowValue(int iSave, object oPC)
+struct alignment_info GetAlignmentInfo(object oPC=OBJECT_SELF);
+
+int GetIsAlignmentInfoValid(struct alignment_info A);
+//==================================== implementation ================================
+
+// Get value of saving throw iSave on oPC
+// - iSave SAVING_THROW_* constant
+// - oPC creature to get the saving throw of
+// * returns the value of the specified saving throw or -1 if iSave is incorrect or oTarget is invalid.
+int GetSavingThrowValue(int iSave, object oPC=OBJECT_SELF)
 {
+    if (!GetIsObjectValid(oPC)) return -1;
     switch(iSave)
     {
         case SAVING_THROW_FORT: return GetFortitudeSavingThrow(oPC);
         case SAVING_THROW_WILL: return GetWillSavingThrow(oPC);
         case SAVING_THROW_REFLEX: return GetReflexSavingThrow(oPC);
     }
-    return 0;
+    return -1;
 }
 
-struct alignment_info GetAlignmentInfo(object oPC)
+// Get alignment info from oPC
+// - oPC creature to take alignment info from
+// * Returns alignment_info of oPC
+struct alignment_info GetAlignmentInfo(object oPC=OBJECT_SELF)
 {
     struct alignment_info Alignment;
     Alignment.iLC = GetAlignmentLawChaos(oPC);
@@ -49,29 +44,10 @@ struct alignment_info GetAlignmentInfo(object oPC)
     return Alignment;
 }
 
-string GetAlignmentName(int iLC, int iGE)
+// Check if alignment_info A is valid
+// - A alignment_info to check
+// * Returns TRUE if A is valid, FALSE otherwise.
+int GetIsAlignmentInfoValid(struct alignment_info A)
 {
-    string sAlignment = "";
-    switch (iLC)
-    {
-        case ALIGNMENT_CHAOTIC: { sAlignment = "Chaotic"; break; }
-        case ALIGNMENT_NEUTRAL: { sAlignment = "Neutral"; break; }
-        case ALIGNMENT_LAWFUL: { sAlignment = "Lawful"; break; }
-    }
-
-    switch (iGE)
-    {
-        case ALIGNMENT_EVIL: { sAlignment += " Evil"; break; }
-        case ALIGNMENT_NEUTRAL:
-        {
-            sAlignment += " Neutral";
-            if (iLC == ALIGNMENT_NEUTRAL)
-            {
-                sAlignment = "True Neutral";
-            }
-            break;
-        }
-        case ALIGNMENT_GOOD: { sAlignment += " Good"; break; }
-    }
-    return sAlignment;
+    return A.iLC != -1 && A.iGE != -1 && A.iLCValue != -1 && A.iGEValue != -1;
 }

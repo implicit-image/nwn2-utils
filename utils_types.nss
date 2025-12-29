@@ -1,127 +1,77 @@
 #include "utils_log"
+#include "utils_const"
 
-void TypeError(int iPassedType, int iExpectedType1=0, int iExpectedType2=0, int iExpectedType3=0, int iExpectedType4=0, int iExpectedType5=0, int iExpectedType6=0);
-
-string TypeName(int iType);
-
-
-const int TYPE_INVALID = -1;
-const int TYPE_INT = 1;
-const int TYPE_FLOAT = 2;
-const int TYPE_STRING = 3;
-const int TYPE_OBJECT = 4;
-const int TYPE_LOCATION = 5;
-const int TYPE_VECTOR = 6;
-
-const string TYPE_NAME_INVALID = "<INVALID>";
-const string TYPE_NAME_INT = "INT";
-const string TYPE_NAME_FLOAT = "FLOAT";
-const string TYPE_NAME_STRING = "STRING";
-const string TYPE_NAME_OBJECT = "OBJECT";
-const string TYPE_NAME_LOCATION = "LOCATION";
-const string TYPE_NAME_VECTOR = "VECTOR";
-
-// identities
-const int INT_ADD_ID = 0;
-const int INT_MULTIPLY_ID = 1;
-const int INT_OR_ID = 0;
-const float FLOAT_ADD_ID = 0.0f;
-const float FLOAT_MULTIPLY_ID = 1.0f;
-const string STRING_CONCAT_ID = "";
-
-struct MaybeInt
+struct maybe_int
 {
     int isValid;
     int value;
 };
 
-struct MaybeFloat
+struct maybe_float
 {
     int isValid;
     float value;
 };
 
-struct MaybeString
+struct maybe_string
 {
     int isValid;
     string value;
 };
 
-struct MaybeLocation
+struct maybe_location
 {
     int isValid;
     location value;
 };
 
-struct MaybeVector
+struct maybe_vector
 {
     int isValid;
     vector value;
 };
 
-struct MaybeObject
+struct maybe_object
 {
     int isValid;
     object value;
 };
 
-struct MaybeEffect
+struct maybe_effect
 {
     int isValid;
     effect value;
 };
 
-struct PairInt
+struct int_pair
 {
     int _1;
     int _2;
 };
 
-struct PairFloat
+struct float_pair
 {
     float _1;
     float _2;
 };
 
-struct PairString
+struct string_pair
 {
     string _1;
     string _2;
 };
 
-struct PairLocation
+struct location_pair
 {
     location _1;
     location _2;
 };
 
-struct PairObject
+struct object_pair
 {
     object _1;
     object _2;
 };
-
-
-struct LocalEffect
-{
-    string sRef;
-};
-
-
-struct EffectLink
-{
-    effect _1;
-    effect _2;
-    effect _3;
-    effect _4;
-    effect _5;
-    effect _6;
-    effect _7;
-    effect _8;
-    effect _9;
-    effect _10;
-};
-
 
 struct local_string
 {
@@ -158,6 +108,42 @@ struct local_location
     object oOwner;
 };
 
+void TypeError(int iPassedType, int iExpectedType1=0, int iExpectedType2=0, int iExpectedType3=0, int iExpectedType4=0, int iExpectedType5=0, int iExpectedType6=0);
+
+string TypeName(int iType);
+
+struct local_int LocalInt(string sVar, int iValue, object oOwner=OBJECT_SELF);
+
+struct local_string LocalString(string sVar, string sValue, object oOwner=OBJECT_SELF);
+
+struct local_float LocalFloat(string sVar, float fValue, object oOwner=OBJECT_SELF);
+
+struct local_object LocalObject(string sVar, object oValue, object oOwner=OBJECT_SELF);
+
+struct local_location LocalLocation(string sVar, location lValue, object oOwner=OBJECT_SELF);
+
+struct int_pair IntPair(int i1, int i2);
+
+struct float_pair FloatPair(float f1, float f2);
+
+struct string_pair StringPair(string s1, string s2);
+
+struct object_pair ObjectPair(object o1, object o2);
+
+struct location_pair LocationPair(location l1, location l2);
+
+int GetIsLocalStringValid(struct local_string String);
+
+int GetIsLocalIntValid(struct local_int Int);
+
+int GetIsLocalFloatValid(struct local_float Float);
+
+int GetIsLocalObjectValid(struct local_object Object);
+
+int GetIsLocalLocationValid(struct local_location Location);
+
+//============================================== implementation =================================
+
 void TypeError(int iPassedType, int iExpectedType1=0, int iExpectedType2=0, int iExpectedType3=0, int iExpectedType4=0, int iExpectedType5=0, int iExpectedType6=0)
 {
     string sErrMsg = "Type Error: passed argument of type " + TypeName(iPassedType);
@@ -188,7 +174,7 @@ string TypeName(int iType)
     return TYPE_NAME_INVALID;
 }
 
-struct local_int MakeLocalInt(string sVar, int iValue, object oOwner=OBJECT_SELF)
+struct local_int LocalInt(string sVar, int iValue, object oOwner=OBJECT_SELF)
 {
     struct local_int LocalInt;
     LocalInt.sVar = sVar;
@@ -198,7 +184,7 @@ struct local_int MakeLocalInt(string sVar, int iValue, object oOwner=OBJECT_SELF
     return LocalInt;
 }
 
-struct local_string MakeLocalString(string sVar, string sValue, object oOwner=OBJECT_SELF)
+struct local_string LocalString(string sVar, string sValue, object oOwner=OBJECT_SELF)
 {
     struct local_string LocalString;
     LocalString.sVar = sVar;
@@ -208,7 +194,7 @@ struct local_string MakeLocalString(string sVar, string sValue, object oOwner=OB
     return LocalString;
 }
 
-struct local_float MakeLocalFloat(string sVar, float fValue, object oOwner=OBJECT_SELF)
+struct local_float LocalFloat(string sVar, float fValue, object oOwner=OBJECT_SELF)
 {
     struct local_float LocalFloat;
     LocalFloat.sVar = sVar;
@@ -218,25 +204,94 @@ struct local_float MakeLocalFloat(string sVar, float fValue, object oOwner=OBJEC
     return LocalFloat;
 }
 
-
-
-struct local_int MakeLocalInt(string sVar, int iValue, object oOwner=OBJECT_SELF)
+struct local_object LocalObject(string sVar, object oValue, object oOwner=OBJECT_SELF)
 {
-    struct local_int LocalInt;
-    LocalInt.sVar = sVar;
-    LocalInt.iValue = iValue;
-    LocalInt.oOwner = oOwner;
+    struct local_object LocalObject;
+    LocalObject.sVar = sVar;
+    LocalObject.oValue = oValue;
+    LocalObject.oOwner = oOwner;
 
-    return LocalInt;
+    return LocalObject;
+}
+
+struct local_location LocalLocation(string sVar, location lValue, object oOwner=OBJECT_SELF)
+{
+    struct local_location LocalLocation;
+    LocalLocation.sVar = sVar;
+    LocalLocation.lValue = lValue;
+    LocalLocation.oOwner = oOwner;
+
+    return LocalLocation;
+}
+
+struct int_pair IntPair(int i1, int i2)
+{
+    struct int_pair Pair;
+    Pair._1 = i1;
+    Pair._2 = i2;
+
+    return Pair;
+}
+
+struct float_pair FloatPair(float f1, float f2)
+{
+    struct float_pair Pair;
+    Pair._1 = f1;
+    Pair._2 = f2;
+
+    return Pair;
+}
+
+struct string_pair StringPair(string s1, string s2)
+{
+    struct string_pair Pair;
+    Pair._1 = s1;
+    Pair._2 = s2;
+
+    return Pair;
+}
+
+struct object_pair ObjectPair(object o1, object o2)
+{
+    struct object_pair Pair;
+    Pair._1 = o1;
+    Pair._2 = o2;
+
+    return Pair;
+}
+
+struct location_pair LocationPair(location l1, location l2)
+{
+    struct location_pair Pair;
+    Pair._1 = l1;
+    Pair._2 = l2;
+
+    return Pair;
+}
+
+int GetIsLocalStringValid(struct local_string String)
+{
+    return GetIsObjectValid(String.oOwner) && String.sVar != "";
+}
+
+int GetIsLocalIntValid(struct local_int Int)
+{
+    return GetIsObjectValid(Int.oOwner) && Int.sVar != "";
+}
+
+int GetIsLocalFloatValid(struct local_float Float)
+{
+    return GetIsObjectValid(Float.oOwner) && Float.sVar != "";
+}
+
+int GetIsLocalObjectValid(struct local_object Object)
+{
+    return GetIsObjectValid(Object.oOwner) && Object.sVar != "" && GetIsObjectValid(Object.oValue);
+}
+
+int GetIsLocalLocationValid(struct local_location Location)
+{
+    return GetIsObjectValid(Location.oOwner) && Location.sVar != "" && GetIsLocationValid(Location.lValue);
 }
 
 
-struct local_int MakeLocalInt(string sVar, int iValue, object oOwner=OBJECT_SELF)
-{
-    struct local_int LocalInt;
-    LocalInt.sVar = sVar;
-    LocalInt.iValue = iValue;
-    LocalInt.oOwner = oOwner;
-
-    return LocalInt;
-}

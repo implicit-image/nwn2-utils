@@ -11,7 +11,7 @@ const int LOG_LEVEL_ERROR = 1;
 const int LOG_LEVEL_WARNING = 2;
 const int LOG_LEVEL_INFO = 3;
 
-void FloatingMessage(string message, string color="white");
+void FloatingMessage(string message, int iBroadcast=TRUE, object oCreature=OBJECT_SELF, string color="white");
 
 void SetLogObject(object oTarget, int iPersistent=FALSE);
 
@@ -34,14 +34,19 @@ int GetLogLevel();
 void PrintFunctionCall(string sFunctionName, string sMsg="", string sArg1="", string sArg2="", string sArg3="", string sArg4="", string sArg5="", string sArg6="", string sArg7="");
 
 
-//============================= Implemntation =================================
+//============================= implantation =================================
 
-
-void FloatingMessage(string message, string color="white")
+// Display a floating message above oCreature
+// - message text to be displayed
+// - iBroadcast if TRUE, show the text only to the creatures in the same faction as oCrature
+// - oCreature creature to float the object above
+// - color color of the message
+void FloatingMessage(string message, int iBroadcast=TRUE, object oCreature=OBJECT_SELF, string color="white")
 {
-    FloatingTextStringOnCreature(message, OBJECT_SELF);
+    FloatingTextStringOnCreature(message, oCreature, iBroadcast);
 }
 
+// FIXME: deprecated, remove!
 void SetLogObject(object oTarget, int iPersistent=FALSE)
 {
     object oMod = GetModule();
@@ -49,6 +54,7 @@ void SetLogObject(object oTarget, int iPersistent=FALSE)
     SetLocalInt(oMod, MODULE_VAR_UTILS_LOG_PERSISTENT, iPersistent);
 }
 
+// FIXME: deprecated, remove!
 void ResetLogObject()
 {
     object oMod = GetModule();
@@ -56,6 +62,10 @@ void ResetLogObject()
     DeleteLocalInt(oMod, MODULE_VAR_UTILS_LOG_PERSISTENT);
 }
 
+// Log message in a given color and send it to the target object.
+// - message text to log
+// - oTarget object to send the message to
+// - color color for the object message
 void Log(string message, object oTarget=OBJECT_SELF, string color="white")
 {
     string RGBmsg = "<color=" + color + ">" + message + "</color>";
@@ -63,7 +73,7 @@ void Log(string message, object oTarget=OBJECT_SELF, string color="white")
     SendMessageToPC(oTarget, RGBmsg);
 }
 
-
+// Send info message
 void Info(string message, string color="yellow", int iIgnoreLogLevel=FALSE)
 {
     if (iIgnoreLogLevel || GetLogLevel() > LOG_LEVEL_INFO)
@@ -72,6 +82,7 @@ void Info(string message, string color="yellow", int iIgnoreLogLevel=FALSE)
     }
 }
 
+// Send error message
 void Error(string message, string color="red", int iIgnoreLogLevel=FALSE)
 {
     if (iIgnoreLogLevel || GetLogLevel() > LOG_LEVEL_ERROR)
@@ -80,6 +91,7 @@ void Error(string message, string color="red", int iIgnoreLogLevel=FALSE)
     }
 }
 
+// Send success message
 void Success(string message, string color="green", int iIgnoreLogLevel=FALSE)
 {
     if (iIgnoreLogLevel || GetLogLevel() > LOG_LEVEL_WARNING)
@@ -88,6 +100,7 @@ void Success(string message, string color="green", int iIgnoreLogLevel=FALSE)
     }
 }
 
+// Send warning message
 void Warning(string message, string color="orange", int iIgnoreLogLevel=FALSE)
 {
     if (iIgnoreLogLevel || GetLogLevel() > LOG_LEVEL_INFO)
@@ -96,17 +109,20 @@ void Warning(string message, string color="orange", int iIgnoreLogLevel=FALSE)
     }
 }
 
+// Set module-local log level
 void SetLogLevel(int iLevel)
 {
     iLevel = ClampInt(iLevel, LOG_LEVEL_QUIET, LOG_LEVEL_INFO);
     SetLocalInt(GetModule(), MODULE_VAR_UTILS_LOG_LEVEL, iLevel);
 }
 
+// get module-local log level
 int GetLogLevel()
 {
     return GetLocalInt(GetModule(), MODULE_VAR_UTILS_LOG_LEVEL);
 }
 
+// FIXME: deprecated
 void PrintFunctionCall(string sFunctionName, string sMsg="",  string sArg1="", string sArg2="", string sArg3="", string sArg4="", string sArg5="", string sArg6="", string sArg7="")
 {
     // quiet it down if logging isn't loud
