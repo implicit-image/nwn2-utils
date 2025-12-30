@@ -3,27 +3,27 @@
 
 //=========================================== Declarations ====================================================
 
-string ArrayAt(string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1);
+string UXArrayAt(string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1);
 
-string SetArrayIntAt(int iValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1);
+string UXSetArrayIntAt(int iValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1);
 
-string SetArrayFloatAt(float fValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1);
+string UXSetArrayFloatAt(float fValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1);
 
-string SetArrayStringAt(string sValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1);
+string UXSetArrayStringAt(string sValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1);
 
-string SetArrayObjectAt(object oValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1);
+string UXSetArrayObjectAt(object oValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1);
 
-string SetArrayLocationAt(location lValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1);
+string UXSetArrayLocationAt(location lValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1);
 
-void ClearIntArray(string sArr, int iLength, int iStart=0);
+void UXClearIntArray(string sArr, int iLength, object oTarget=OBJECT_SELF, int iStart=0);
 
-void ClearStringArray(string sArr, int iLength, int iStart=0);
+void UXClearStringArray(string sArr, int iLength, object oTarget=OBJECT_SELF, int iStart=0);
 
-void ClearFloatArray(string sArr, int iLength, int iStart=0);
+void UXClearFloatArray(string sArr, int iLength, object oTarget=OBJECT_SELF, int iStart=0);
 
-void ClearObjectArray(string sArr, int iLength, int iStart=0);
+void UXClearObjectArray(string sArr, int iLength, object oTarget=OBJECT_SELF, int iStart=0);
 
-void ClearLocationArray(string sArr, int iLength, int iStart=0);
+void UXClearLocationArray(string sArr, int iLength, object oTarget=OBJECT_SELF, int iStart=0);
 
 //================================ Implementation ======================================
 
@@ -31,7 +31,7 @@ void ClearLocationArray(string sArr, int iLength, int iStart=0);
 // - sArr name of the array
 // - iIndex(1-5) positions along dimensions of the array (5 dimensions supported)
 // * Returns a variable name for the array element sArr[iIndex1][iIndex2][iIndex3][iIndex4][iIndex5]
-string ArrayAt(string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1)
+string UXArrayAt(string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1)
 {
     string sArrName = sArr + IntToString(iIndex1);
     if (iIndex2 > -1) sArrName += "_" + IntToString(iIndex2);
@@ -47,9 +47,9 @@ string ArrayAt(string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIn
 // - sArr name of the array
 // - iIndex(1-5) positions along the dimensions of the array
 // * Returns the name of modified element
-string SetArrayIntAt(int iValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1)
+string UXSetArrayIntAt(int iValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1)
 {
-    string sArrElemVariable = ArrayAt(sArr, iIndex1, iIndex2, iIndex3, iIndex4, iIndex5);
+    string sArrElemVariable = UXArrayAt(sArr, iIndex1, iIndex2, iIndex3, iIndex4, iIndex5);
     SetLocalInt(OBJECT_SELF, sArrElemVariable, iValue);
 
     return sArrElemVariable;
@@ -60,11 +60,11 @@ string SetArrayIntAt(int iValue, string sArr, int iIndex1, int iIndex2=-1, int i
 // - sArr name of the array
 // - iIndex(1-5) positions along the dimensions of the array
 // * Returns the name of modified element
-string SetArrayFloatAt(float fValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1)
+string UXSetArrayFloatAt(float fValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1)
 {
-    string sArrElemVariable = ArrayAt(sArr, iIndex1, iIndex2, iIndex3, iIndex4, iIndex5);
+    string sArrElemVariable = UXArrayAt(sArr, iIndex1, iIndex2, iIndex3, iIndex4, iIndex5);
 
-    SetLocalFloat(OBJECT_SELF, ArrayAt(sArr, iIndex1, iIndex2, iIndex3, iIndex4, iIndex5), fValue);
+    SetLocalFloat(OBJECT_SELF, sArrElemVariable, fValue);
 
     return sArrElemVariable;
 }
@@ -74,11 +74,11 @@ string SetArrayFloatAt(float fValue, string sArr, int iIndex1, int iIndex2=-1, i
 // - sArr name of the array
 // - iIndex(1-5) positions along the dimensions of the array
 // * Returns the name of modified element
-string SetArrayStringAt(string sValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1)
+string UXSetArrayStringAt(string sValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1)
 {
-    string sArrElemVariable = ArrayAt(sArr, iIndex1, iIndex2, iIndex3, iIndex4, iIndex5);
+    string sArrElemVariable = UXArrayAt(sArr, iIndex1, iIndex2, iIndex3, iIndex4, iIndex5);
 
-    SetLocalString(OBJECT_SELF, ArrayAt(sArr, iIndex1, iIndex2, iIndex3, iIndex4, iIndex5), sValue);
+    SetLocalString(OBJECT_SELF, sArrElemVariable, sValue);
 
     return sArrElemVariable;
 }
@@ -88,11 +88,11 @@ string SetArrayStringAt(string sValue, string sArr, int iIndex1, int iIndex2=-1,
 // - sArr name of the array
 // - iIndex(1-5) positions along the dimensions of the array
 // * Returns the name of modified element
-string SetArrayObjectAt(object oValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1)
+string UXSetArrayObjectAt(object oValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1)
 {
-    string sArrElemVariable = ArrayAt(sArr, iIndex1, iIndex2, iIndex3, iIndex4, iIndex5);
+    string sArrElemVariable = UXArrayAt(sArr, iIndex1, iIndex2, iIndex3, iIndex4, iIndex5);
 
-    SetLocalObject(OBJECT_SELF, ArrayAt(sArr, iIndex1, iIndex2, iIndex3, iIndex4, iIndex5), oValue);
+    SetLocalObject(OBJECT_SELF, sArrElemVariable, oValue);
 
     return sArrElemVariable;
 }
@@ -102,11 +102,11 @@ string SetArrayObjectAt(object oValue, string sArr, int iIndex1, int iIndex2=-1,
 // - sArr name of the array
 // - iIndex(1-5) positions along the dimensions of the array
 // * Returns the name of modified element
-string SetArrayLocationAt(location lValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1)
+string UXSetArrayLocationAt(location lValue, string sArr, int iIndex1, int iIndex2=-1, int iIndex3=-1, int iIndex4=-1, int iIndex5=-1)
 {
-    string sArrElemVariable = ArrayAt(sArr, iIndex1, iIndex2, iIndex3, iIndex4, iIndex5);
+    string sArrElemVariable = UXArrayAt(sArr, iIndex1, iIndex2, iIndex3, iIndex4, iIndex5);
 
-    SetLocalLocation(OBJECT_SELF, ArrayAt(sArr, iIndex1, iIndex2, iIndex3, iIndex4, iIndex5), lValue);
+    SetLocalLocation(OBJECT_SELF, sArrElemVariable, lValue);
 
     return sArrElemVariable;
 }
@@ -118,11 +118,11 @@ string SetArrayLocationAt(location lValue, string sArr, int iIndex1, int iIndex2
 // - sArr the int array to clear
 // - iLength the length to clear
 // - iStart starting index
-void ClearIntArray(string sArr, int iLength, int iStart=0)
+void UXClearIntArray(string sArr, int iLength, object oTarget=OBJECT_SELF, int iStart=0)
 {
     while(iLength >= iStart)
     {
-        DeleteLocalInt(OBJECT_SELF, ArrayAt(sArr, iStart));
+        DeleteLocalInt(oTarget, UXArrayAt(sArr, iStart));
         iStart++;
     }
 }
@@ -131,11 +131,11 @@ void ClearIntArray(string sArr, int iLength, int iStart=0)
 // - sArr the string array to clear
 // - iLength the length to clear
 // - iStart starting index
-void ClearStringArray(string sArr, int iLength, int iStart=0)
+void UXClearStringArray(string sArr, int iLength, object oTarget=OBJECT_SELF, int iStart=0)
 {
     while(iLength >= iStart)
     {
-        DeleteLocalString(OBJECT_SELF, ArrayAt(sArr, iStart));
+        DeleteLocalString(oTarget, UXArrayAt(sArr, iStart));
         iStart++;
     }
 }
@@ -144,11 +144,11 @@ void ClearStringArray(string sArr, int iLength, int iStart=0)
 // - sArr the float array to clear
 // - iLength the length to clear
 // - iStart starting index
-void ClearFloatArray(string sArr, int iLength, int iStart=0)
+void UXClearFloatArray(string sArr, int iLength, object oTarget=OBJECT_SELF, int iStart=0)
 {
     while(iLength >= iStart)
     {
-        DeleteLocalFloat(OBJECT_SELF, ArrayAt(sArr, iStart));
+        DeleteLocalFloat(oTarget, UXArrayAt(sArr, iStart));
         iStart++;
     }
 }
@@ -157,11 +157,11 @@ void ClearFloatArray(string sArr, int iLength, int iStart=0)
 // - sArr the object array to clear
 // - iLength the length to clear
 // - iStart starting index
-void ClearObjectArray(string sArr, int iLength, int iStart=0)
+void UXClearObjectArray(string sArr, int iLength, object oTarget=OBJECT_SELF, int iStart=0)
 {
     while(iLength >= iStart)
     {
-        DeleteLocalObject(OBJECT_SELF, ArrayAt(sArr, iStart));
+        DeleteLocalObject(oTarget, UXArrayAt(sArr, iStart));
         iStart++;
     }
 }
@@ -170,11 +170,11 @@ void ClearObjectArray(string sArr, int iLength, int iStart=0)
 // - sArr the location array to clear
 // - iLength the length to clear
 // - iStart starting index
-void ClearLocationArray(string sArr, int iLength, int iStart=0)
+void UXClearLocationArray(string sArr, int iLength, object oTarget=OBJECT_SELF, int iStart=0)
 {
     while(iLength >= iStart)
     {
-        DeleteLocalLocation(OBJECT_SELF, ArrayAt(sArr, iStart));
+        DeleteLocalLocation(oTarget, UXArrayAt(sArr, iStart));
         iStart++;
     }
 }

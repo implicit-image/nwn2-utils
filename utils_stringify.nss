@@ -3,19 +3,20 @@
 
 //================================================ Declarations =================
 
-string ItemPropertyToString(itemproperty ipProp);
+string UXItemPropertyToString(itemproperty ipProp);
 
-itemproperty ItemPropertyFromString(string sIPStringRepr);
+itemproperty UXItemPropertyFromString(string sIPStringRepr);
 
-string LocationToString(location lLocation);
+string UXLocationToString(location lLocation);
 
-location StringToLocation(string sLocation);
+location UXStringToLocation(string sLocation);
+
 //=============================================== Implementation ================
 
 
 
 // code taken from jallaix's jx_inc_data_func.nss
-string ItemPropertyToString(itemproperty ipProp)
+string UXItemPropertyToString(itemproperty ipProp)
 {
     int iIPType = GetItemPropertyType(ipProp);
 
@@ -158,7 +159,7 @@ string ItemPropertyToString(itemproperty ipProp)
 
 }
 
-itemproperty StringToItemProperty(string sItemProperty)
+itemproperty UXStringToItemProperty(string sItemProperty)
 {
     itemproperty ipProperty;
 
@@ -204,7 +205,7 @@ itemproperty StringToItemProperty(string sItemProperty)
 // Get a string from a corresponding location
 // - lLocation Location from which the string is get
 // * Returns a string corresponding to the location
-string LocationToString(location lLocation)
+string UXLocationToString(location lLocation)
 {
     // Get the location informations : area, position, orientation
     object oArea = GetAreaFromLocation(lLocation);
@@ -223,7 +224,7 @@ string LocationToString(location lLocation)
 // Get a location from a corresponding string
 // - sLocation String from which the location is get
 // * Returns a loation corresponding to the string
-location StringToLocation(string sLocation)
+location UXStringToLocation(string sLocation)
 {
     object oArea = IntToObject(StringToInt(GetTokenByPosition(sLocation, "!", 0)));
     vector vPosition;

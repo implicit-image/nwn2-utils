@@ -7,18 +7,18 @@ struct alignment_info
     int iGEValue;
 };
 
-int GetSavingThrowValue(int iSave, object oPC=OBJECT_SELF);
+int UXGetSavingThrowValue(int iSave, object oPC=OBJECT_SELF);
 
-struct alignment_info GetAlignmentInfo(object oPC=OBJECT_SELF);
+struct alignment_info UXGetAlignmentInfo(object oPC=OBJECT_SELF);
 
-int GetIsAlignmentInfoValid(struct alignment_info A);
+int UXGetIsAlignmentInfoValid(struct alignment_info A);
 //==================================== implementation ================================
 
 // Get value of saving throw iSave on oPC
 // - iSave SAVING_THROW_* constant
 // - oPC creature to get the saving throw of
 // * returns the value of the specified saving throw or -1 if iSave is incorrect or oTarget is invalid.
-int GetSavingThrowValue(int iSave, object oPC=OBJECT_SELF)
+int UXGetSavingThrowValue(int iSave, object oPC=OBJECT_SELF)
 {
     if (!GetIsObjectValid(oPC)) return -1;
     switch(iSave)
@@ -33,7 +33,7 @@ int GetSavingThrowValue(int iSave, object oPC=OBJECT_SELF)
 // Get alignment info from oPC
 // - oPC creature to take alignment info from
 // * Returns alignment_info of oPC
-struct alignment_info GetAlignmentInfo(object oPC=OBJECT_SELF)
+struct alignment_info UXGetAlignmentInfo(object oPC=OBJECT_SELF)
 {
     struct alignment_info Alignment;
     Alignment.iLC = GetAlignmentLawChaos(oPC);
@@ -47,7 +47,7 @@ struct alignment_info GetAlignmentInfo(object oPC=OBJECT_SELF)
 // Check if alignment_info A is valid
 // - A alignment_info to check
 // * Returns TRUE if A is valid, FALSE otherwise.
-int GetIsAlignmentInfoValid(struct alignment_info A)
+int UXGetIsAlignmentInfoValid(struct alignment_info A)
 {
     return A.iLC != -1 && A.iGE != -1 && A.iLCValue != -1 && A.iGEValue != -1;
 }

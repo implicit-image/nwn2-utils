@@ -9,33 +9,33 @@ struct timestamp
     int days;
 };
 
-struct timestamp GetCurrentTimestamp();
+struct timestamp UXGetCurrentTimestamp();
 
-int GetIsTimestampFromPast(struct timestamp T);
+int UXGetIsTimestampFromPast(struct timestamp T);
 
-int GetIsTimestampFromFuture(struct timestamp T);
+int UXGetIsTimestampFromFuture(struct timestamp T);
 
-int GetIsTimestampOlder(struct timestamp T1, struct timestamp T2);
+int UXGetIsTimestampOlder(struct timestamp T1, struct timestamp T2);
 
-int GetIsTimestampNewer(struct timestamp T1, struct timestamp T2);
+int UXGetIsTimestampNewer(struct timestamp T1, struct timestamp T2);
 
-int GetIsTimestampEqual(struct timestamp T1, struct timestamp T2);
+int UXGetIsTimestampEqual(struct timestamp T1, struct timestamp T2);
 
-int GetIsTimestampOlderThan(struct timestamp T, int iMS=6000);
+int UXGetIsTimestampOlderThan(struct timestamp T, int iMS=6000);
 
-struct timestamp StringToTimestamp(string sStrRep);
+struct timestamp UXStringToTimestamp(string sStrRep);
 
-string TimestampToString(struct timestamp T);
+string UXTimestampToString(struct timestamp T);
 
-int GetIsTimestampValid(struct timestamp T);
+int UXGetIsTimestampValid(struct timestamp T);
 
-string SaveTimestamp(string sVarName, struct timestamp T, object oOwner=OBJECT_SELF);
+string UXSaveTimestamp(string sVarName, struct timestamp T, object oOwner=OBJECT_SELF);
 
 //================================== implementation ======================================
 
 // Get a timestamp representing current time.
 // * Returns a timestamp representing current time. The timestamp may be invalid.
-struct timestamp GetCurrentTimestamp()
+struct timestamp UXGetCurrentTimestamp()
 {
     int iCurHour = GetTimeHour() * (1000 * 60 * 60);
     int iCurMinute = GetTimeMinute() * (1000 * 60);
@@ -61,26 +61,26 @@ struct timestamp GetCurrentTimestamp()
 // Check if timestamp T represents time in the past (is older tah current timestamp).
 // - T timestamp to check
 // * Returns TRUE if T represents time from the past, FALSE otherwise.
-int GetIsTimestampFromPast(struct timestamp T)
+int UXGetIsTimestampFromPast(struct timestamp T)
 {
-    struct timestamp Now = GetCurrentTimestamp();
-    return GetIsTimestampOlder(T, Now);
+    struct timestamp Now = UXGetCurrentTimestamp();
+    return UXGetIsTimestampOlder(T, Now);
 }
 
 // Check if timestamp T represents time in the future (is younger than current timestamp).
 // - T timestamp to check.
 // * Returns TRUE if T represents time from the future, FALSE otherwise.
-int GetIsTimestampFromFuture(struct timestamp T)
+int UXGetIsTimestampFromFuture(struct timestamp T)
 {
-    struct timestamp Now = GetCurrentTimestamp();
-    return GetIsTimestampOlder(Now, T);
+    struct timestamp Now = UXGetCurrentTimestamp();
+    return UXGetIsTimestampOlder(Now, T);
 }
 
 // Check if T1 is newer than T2.
 // - T1 timestamp
 // - T2 other timestamp
 // * Returns TRUE if T1 is newer than T2, FALSE otherwise.
-int GetIsTimestampNewer(struct timestamp T1, struct timestamp T2)
+int UXGetIsTimestampNewer(struct timestamp T1, struct timestamp T2)
 {
     return (T1.days == T2.days) ? (T1.miliseconds < T2.miliseconds) : (T1.days < T2.days);
 }
@@ -89,7 +89,7 @@ int GetIsTimestampNewer(struct timestamp T1, struct timestamp T2)
 // - T1 timestamp
 // - T2 other timestamp
 // * Returns TRUE if T1 is older than T2, FALSE otherwise
-int GetIsTimestampOlder(struct timestamp T1, struct timestamp T2)
+int UXGetIsTimestampOlder(struct timestamp T1, struct timestamp T2)
 {
     return (T1.days == T2.days) ? (T1.miliseconds > T2.miliseconds) : (T1.days > T2.days);
 }
@@ -98,7 +98,7 @@ int GetIsTimestampOlder(struct timestamp T1, struct timestamp T2)
 // - T1 timestamp 1
 // - T2 other timestamp
 // * Returns TRUE if T1 and T2 represent the same time, FALSE otherwise.
-int GetIsTimestampEqual(struct timestamp T1, struct timestamp T2)
+int UXGetIsTimestampEqual(struct timestamp T1, struct timestamp T2)
 {
     return (T1.days == T2.days) && (T1.miliseconds == T2.miliseconds);
 }
@@ -107,9 +107,9 @@ int GetIsTimestampEqual(struct timestamp T1, struct timestamp T2)
 // - T timestamp to check
 // - iMS number of miliseconds
 // * Returns TRUE if T is older than iMs, FALSE if it is not, and -1 if the timestamp T is invalid.
-int GetIsTimestampOlderThan(struct timestamp T, int iMS=6000)
+int UXGetIsTimestampOlderThan(struct timestamp T, int iMS=6000)
 {
-    if (!GetIsTimestampValid(T)) return -1;
+    if (!UXGetIsTimestampValid(T)) return -1;
 
     if (T.miliseconds > iMS) return TRUE;
 
@@ -127,7 +127,7 @@ int GetIsTimestampOlderThan(struct timestamp T, int iMS=6000)
 // Convert string sStrRep to a timestamp.
 // - sStrRep string representation of timestamp to be converted
 // * Returns a timestamp (it may be invalid).
-struct timestamp StringToTimestamp(string sStrRep)
+struct timestamp UXStringToTimestamp(string sStrRep)
 {
     struct timestamp T;
     int sus = FALSE;
@@ -146,16 +146,16 @@ struct timestamp StringToTimestamp(string sStrRep)
 // Convert timestamp T to a string.
 // - T timestamp to convert
 // * returns empty string if T is not valid, string representation of T otherwise.
-string TimestampToString(struct timestamp T)
+string UXTimestampToString(struct timestamp T)
 {
-    if (!GetIsTimestampValid(T)) return "";
+    if (!UXGetIsTimestampValid(T)) return "";
     return IntToString(T.days) + UTILS_TIMESTAMP_DELIM + IntToString(T.miliseconds);
 }
 
 // Check if T is a valid timestamp
 // - T timestamp to check
 // * returns TRUE if T is valid, FALSE otherwise.
-int GetIsTimestampValid(struct timestamp T)
+int UXGetIsTimestampValid(struct timestamp T)
 {
     return T.days > 0 && T.days < UTILS_TIMESTAMP_MAX_DAYS && T.miliseconds >= 0 && T.miliseconds <= UTILS_TIMESTAMP_MAX_MILISECONDS;
 }
@@ -165,11 +165,11 @@ int GetIsTimestampValid(struct timestamp T)
 // - T timestamp to save
 // - oOwner Object to set the variable on
 // * Returns the variable name if the oOwner and T are valid, empty string otherwise
-string SaveTimestamp(string sVarName, struct timestamp T, object oOwner=OBJECT_SELF)
+string UXSaveTimestamp(string sVarName, struct timestamp T, object oOwner=OBJECT_SELF)
 {
-    if (!GetIsObjectValid(oOwner) || !GetIsTimestampValid(T)) return "";
+    if (!GetIsObjectValid(oOwner) || !UXGetIsTimestampValid(T)) return "";
 
-    SetLocalString(oOwner, sVarName, TimestampToString(T));
+    SetLocalString(oOwner, sVarName, UXTimestampToString(T));
 
     return sVarName;
 }

@@ -4,16 +4,16 @@
 #include "utils_const"
 #include "x0_i0_stringlib"
 
-string AppendToLocalStringList(string sVar, string sElem, object
+string UXAppendToLocalStringList(string sVar, string sElem, object
 oObject=OBJECT_SELF, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER);
 
-string PrependToLocalStringList(string sVar, string sElem, object oObject=OBJECT_SELF, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER);
+string UXPrependToLocalStringList(string sVar, string sElem, object oObject=OBJECT_SELF, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER);
 
-int IsInLocalStringList(string sVar, string sElem, object oObject=OBJECT_SELF, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER);
+int UXIsInLocalStringList(string sVar, string sElem, object oObject=OBJECT_SELF, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER);
 
-string DeleteFromLocalStringList(string sVar, string sElem, object oObject=OBJECT_SELF, int iDeleteAll=TRUE, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER);
+string UXDeleteFromLocalStringList(string sVar, string sElem, object oObject=OBJECT_SELF, int iDeleteAll=TRUE, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER);
 
-string AdjustStringListElem(string sElem, string sList, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER);
+string UXAdjustStringListElem(string sElem, string sList, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER);
 
 //================================= implementation ==================================
 
@@ -23,11 +23,11 @@ string AdjustStringListElem(string sElem, string sList, string sDelimiter=STRING
 // - oObject object which stores the variable
 // - sDelimiter delimiter for the list
 // * Returns the new value of the list
-string AppendToLocalStringList(string sVar, string sElem, object
+string UXAppendToLocalStringList(string sVar, string sElem, object
 oObject=OBJECT_SELF, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER)
 {
     string sList = GetLocalString(oObject, sVar);
-    sElem = AdjustStringListElem(sElem, sList, sDelimiter);
+    sElem = UXAdjustStringListElem(sElem, sList, sDelimiter);
     return AppendToLocalString(sVar, sElem, oObject);
 }
 
@@ -37,10 +37,10 @@ oObject=OBJECT_SELF, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER)
 // - oObject object which stores the variable
 // - sDelimiter delimiter for the list
 // * Returns the new value of the list
-string PrependToLocalStringList(string sVar, string sElem, object oObject=OBJECT_SELF, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER)
+string UXPrependToLocalStringList(string sVar, string sElem, object oObject=OBJECT_SELF, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER)
 {
     string sList = GetLocalString(oObject, sVar);
-    sElem = AdjustStringListElem(sElem, sList, sDelimiter);
+    sElem = UXAdjustStringListElem(sElem, sList, sDelimiter);
     return PrependToLocalString(sVar, sElem, oObject);
 }
 
@@ -50,7 +50,7 @@ string PrependToLocalStringList(string sVar, string sElem, object oObject=OBJECT
 // - oObject object which stores the variable
 // - sDelimiter delimiter for the list
 // * Returns TRUE if sElem is in the list, FALSE otherwise.
-int IsInLocalStringList(string sVar, string sElem, object oObject=OBJECT_SELF, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER)
+int UXIsInLocalStringList(string sVar, string sElem, object oObject=OBJECT_SELF, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER)
 {
     string sList = GetLocalString(oObject, sVar);
     if (sList == "") return FALSE;
@@ -64,7 +64,7 @@ int IsInLocalStringList(string sVar, string sElem, object oObject=OBJECT_SELF, s
 // - iDeleteAll whether to delete all occurances or only the first one
 // - sDelimiter delimiter for the list
 // * Returns the new value of the list
-string DeleteFromLocalStringList(string sVar, string sElem, object oObject=OBJECT_SELF, int iDeleteAll=TRUE, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER)
+string UXDeleteFromLocalStringList(string sVar, string sElem, object oObject=OBJECT_SELF, int iDeleteAll=TRUE, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER)
 {
     string sList = GetLocalString(oObject, sVar);
     string sNewList = "";
@@ -87,7 +87,7 @@ string DeleteFromLocalStringList(string sVar, string sElem, object oObject=OBJEC
                 continue;
             }
         }
-        sCur = AdjustStringListElem(sCur, sNewList, sDelimiter);
+        sCur = UXAdjustStringListElem(sCur, sNewList, sDelimiter);
         sNewList = sNewList + sCur;
     }
 
@@ -104,7 +104,7 @@ string DeleteFromLocalStringList(string sVar, string sElem, object oObject=OBJEC
 // - sList list to adjust for
 // - sDelimiter delimiter to use
 // * Returns sElem adjusted for sList
-string AdjustStringListElem(string sElem, string sList, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER)
+string UXAdjustStringListElem(string sElem, string sList, string sDelimiter=STRING_LIST_DEFAULT_DELIMITER)
 {
     if (sList == "" || GetStringRight(sList, 1) == sDelimiter) return sElem;
     return sDelimiter + sElem;
