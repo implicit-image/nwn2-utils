@@ -1,8 +1,8 @@
 #include "utils_const"
 
-int ClampInt(int iValue, int iLower=0, int iUpper=40);
+int UXClampInt(int iValue, int iLower=0, int iUpper=40);
 
-float ClampFloat(float fValue, float fLower=0.0, float fUpper=40.0);
+float UXClampFloat(float fValue, float fLower=0.0, float fUpper=40.0);
 
 int DiceRoll(int iDice, int iDiceNumber=1);
 
@@ -11,7 +11,7 @@ int DiceRoll(int iDice, int iDiceNumber=1);
 // - iLower lower bound
 // - iUpper upper bound
 // * Returns at lest iLower and at most iUpper
-int ClampInt(int iValue, int iLower=0, int iUpper=40) {
+int UXClampInt(int iValue, int iLower=0, int iUpper=40) {
     if (iValue > iUpper) return iUpper;
     if (iValue < iLower) return iLower;
     return iValue;
@@ -23,7 +23,7 @@ int ClampInt(int iValue, int iLower=0, int iUpper=40) {
 // - fLower lower bound
 // - fUpper upper bound
 // * Returns at leats fLower and at most fUpper
-float ClampFloat(float fValue, float fLower=0.0, float fUpper=40.0)
+float UXClampFloat(float fValue, float fLower=0.0, float fUpper=40.0)
 {
     if (fValue > fUpper) return fUpper;
     if (fValue < fLower) return fLower;

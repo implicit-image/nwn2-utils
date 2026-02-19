@@ -112,7 +112,7 @@ void Warning(string message, string color="orange", int iIgnoreLogLevel=FALSE)
 // Set module-local log level
 void SetLogLevel(int iLevel)
 {
-    iLevel = ClampInt(iLevel, LOG_LEVEL_QUIET, LOG_LEVEL_INFO);
+    iLevel = UXClampInt(iLevel, LOG_LEVEL_QUIET, LOG_LEVEL_INFO);
     SetLocalInt(GetModule(), MODULE_VAR_UTILS_LOG_LEVEL, iLevel);
 }
 

@@ -49,8 +49,8 @@ struct timestamp UXGetCurrentTimestamp()
     struct timestamp T;
 
     // make sure the amounts are in valid range
-    int iMiliseconds = ClampInt(iCurHour + iCurMinute + iCurSecond + iCurMilisecond, 0, UTILS_TIMESTAMP_MAX_MILISECONDS);
-    int iDays = ClampInt(iCurrDay + iCurrMonth + iCurrYear, 0, UTILS_TIMESTAMP_MAX_DAYS);
+    int iMiliseconds = UXClampInt(iCurHour + iCurMinute + iCurSecond + iCurMilisecond, 0, UTILS_TIMESTAMP_MAX_MILISECONDS);
+    int iDays = UXClampInt(iCurrDay + iCurrMonth + iCurrYear, 0, UTILS_TIMESTAMP_MAX_DAYS);
 
     T.miliseconds = iMiliseconds;
     T.days = iDays;
