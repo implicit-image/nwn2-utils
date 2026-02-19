@@ -21,6 +21,8 @@ effect UXEffectLink9Effects(effect e1, effect e2, effect e3, effect e4, effect e
 
 effect UXEffectLink10Effects(effect e1, effect e2, effect e3, effect e4, effect e5, effect e6, effect e7, effect e8, effect e9, effect e10);
 
+int UXGetHasEffect(int iEffectType, object oCreature);
+
 //========================================= implementation =======================================
 
 // Link 3 effects
@@ -129,4 +131,18 @@ effect UXEffectLink10Effects(effect e1, effect e2, effect e3, effect e4, effect 
     e1 = EffectLinkEffects(e1, e9);
     e1 = EffectLinkEffects(e1, e10);
     return e1;
+}
+
+int UXGetHasEffect(int iEffectType, object oCreature)
+{
+    effect e = GetFirstEffect(oCreature);
+    while(GetIsEffectValid(e))
+    {
+        if (GetEffectType(e) == iEffectType)
+        {
+            return TRUE;
+        }
+        e = GetNextEffect(oCreature);
+    }
+    return FALSE;
 }
