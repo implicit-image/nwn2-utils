@@ -1,4 +1,5 @@
 #include "utils_math"
+#include "utils_flags"
 
 
 
@@ -69,7 +70,7 @@ void ResetLogObject()
 void Log(string message, object oTarget=OBJECT_SELF, string color="white")
 {
     string RGBmsg = "<color=" + color + ">" + message + "</color>";
-    WriteTimestampedLogEntry(message);
+    if (UTILS_LOG_WRITE_TO_DISK) WriteTimestampedLogEntry(message);
     SendMessageToPC(oTarget, RGBmsg);
 }
 
