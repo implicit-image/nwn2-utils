@@ -7,6 +7,7 @@
 #include "utils_vars"
 #include "utils_list"
 #include "utils_character"
+#include "utils_assert"
 
 
 // void main()
